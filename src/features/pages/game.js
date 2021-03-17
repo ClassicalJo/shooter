@@ -3,35 +3,17 @@ import { useDispatch } from 'react-redux'
 import startEngine from "../engine/gameEngine"
 import Renderer from '../renderer/Renderer'
 import { changePage } from "./state/pageActions"
-import { Engine, World, Runner } from 'matter-js'
 
 let Game = () => {
-
-    let [bodies, setBodies] = useState([])
+    let engine = startEngine()
     let dispatch = useDispatch()
-    useEffect(() => {
-        let loop;
-        let engine = startEngine()
-        let updateCycle = () => {
-            console.log('running')
-            setBodies([...engine.world.bodies])
-        }
-        let cycle = () => {
-            updateCycle()
-            loop = requestAnimationFrame(cycle)
-        }
-        let finishCycle = () => {
-            cancelAnimationFrame(loop)
-            World.clear(engine.world);
-            Engine.clear(engine);
-        }
-        cycle()
-        return finishCycle
-    }, [])
+    console.log('once')
+
     return (
         <g>
             <text fontSize="50" fill="white">You are now in GAME</text>
-            <Renderer bodies={bodies} />
+            
+            <Renderer bodies={engine.world.bodies} />
             <circle fill="red" r="25" onClick={() => dispatch(changePage())} />
         </g>
     )
