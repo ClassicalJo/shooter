@@ -1,11 +1,21 @@
-import React, { useEffect, useState } from 'react'
+import React, { useCallback, useEffect, useRef, useState } from 'react'
+import { useSelector } from 'react-redux'
 
 let Renderer = ({ bodies }) => {
     let [renders, setRenders] = useState(bodies)
-    let updateCycle = () => {
-        console.log("running")
+    let pointer = useSelector(state => state.pointer)
+    let keyboard = useSelector(state => state.keyboard)
+
+    let mouseRef = useRef()
+    mouseRef.current = pointer
+
+    let keyboardRef = useRef()
+    keyboardRef.current = keyboard
+    
+    let updateCycle = useCallback(() => {
         setRenders([...bodies])
-    }
+    }, [bodies])
+
     useEffect(() => {
         let loop;
         let cycle = () => {
@@ -17,7 +27,7 @@ let Renderer = ({ bodies }) => {
         }
         cycle()
         return finishCycle
-    }, [])
+    }, [updateCycle])
     return (
         <g>
             {renders.map(key => {

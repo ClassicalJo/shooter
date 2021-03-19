@@ -6,7 +6,7 @@ const initialState = {
     width: null,
 }
 
-export default function (state = initialState, action) {
+export default function pageReducer (state = initialState, action) {
     switch (action.type) {
         case CHANGE_PAGE: return { ...state, currentPage: action.payload }
         default: return state

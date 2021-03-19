@@ -1,6 +1,7 @@
 import React, { useRef } from 'react'
 import { useSelector, useDispatch } from 'react-redux'
 import Pointer from '../pointer/Pointer'
+import Keyboard from "../keyboard/index"
 import { theaterReady } from "./state/theaterActions"
 import Pages from "../pages"
 
@@ -25,6 +26,7 @@ let Theater = () => {
             {ready && (
                 <g>
                     <Pointer svg={svg} />
+                    <Keyboard svg={svg} />
                     <Pages />
                 </g>
             )}

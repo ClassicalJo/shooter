@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react'
+import React from 'react'
 import { useDispatch } from 'react-redux'
 import startEngine from "../engine/gameEngine"
 import Renderer from '../renderer/Renderer'
@@ -7,7 +7,6 @@ import { changePage } from "./state/pageActions"
 let Game = () => {
     let engine = startEngine()
     let dispatch = useDispatch()
-    console.log('once')
 
     return (
         <g>
